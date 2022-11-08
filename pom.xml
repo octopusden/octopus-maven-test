@@ -15,10 +15,10 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/kzaporozhtsev/octopus-maven-test.git</connection>
+        <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:ssh://github.com:kzaporozhtsev/octopus-maven-test.git</developerConnection>
-        <url>https://github.com/kzaporozhtsev/octopus-maven-test/tree/master</url>
-      <tag>octopus-maven-test-1.0</tag>
+        <url>https://github.com/kzaporozhtsev/octopus-maven-test.git</url>
+        <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>
@@ -33,6 +33,14 @@
     </distributionManagement>
 
     <build>
-        <!-- xxx -->
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <scmCommentPrefix>[ci skip]</scmCommentPrefix>
+                    <tagNameFormat>octopus-maven-test-v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
