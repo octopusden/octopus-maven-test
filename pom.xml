@@ -17,9 +17,9 @@
 
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
-        <developerConnection>scm:git:ssh://github.com:kzaporozhtsev/octopus-maven-test.git</developerConnection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>https://github.com/kzaporozhtsev/octopus-maven-test.git</url>
-  </scm>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
