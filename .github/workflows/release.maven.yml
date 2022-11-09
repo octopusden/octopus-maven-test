@@ -23,7 +23,10 @@ jobs:
           git-release-bot-name: "bot-idhub"
           git-release-bot-email: "bot@idhub.io"
 
-          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+          version-minor: true
+          release-branch-name: "main"
+
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
           access-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
