@@ -13,6 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: Prod
+    env:
+      BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
 
     steps:
     - uses: actions/checkout@v3
@@ -31,4 +33,3 @@ jobs:
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
