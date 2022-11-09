@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.octopusden</groupId>
     <artifactId>octopus-maven-test</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Octopus module for testing Maven release workflow</name>
 
@@ -18,7 +18,6 @@
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>https://github.com/kzaporozhtsev/octopus-maven-test.git</url>
-      <tag>octopus-maven-test-v1.0</tag>
   </scm>
 
     <distributionManagement>
