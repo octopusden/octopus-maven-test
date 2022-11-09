@@ -21,7 +21,8 @@ publishing {
     repositories {
         maven {
             name = "OSSRH"
-            if (project.hasProperty("release") && !project.version.toString().endsWith("-SNAPSHOT")) {
+            version = System.getenv("BUILD_VERSION")
+            if (!project.version.toString().endsWith("-SNAPSHOT")) {
                 url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             } else {
                 url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
