@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Create annotation for build error
+        run: echo "token = ${secrets.GITHUB_TOKEN} ${{secrets.GITHUB_TOKEN}}"
+
       - name: Build and Test
         uses: qcastel/github-actions-maven-cmd@master
         with:
