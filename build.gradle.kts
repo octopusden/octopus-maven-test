@@ -16,6 +16,7 @@ java {
 nexusPublishing {
     repositories {
         sonatype {
+            stagingProfileId.set(System.getenv("SONATYPE_PROFILE_ID"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots"))
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
             username.set(System.getenv("MAVEN_USERNAME"))
