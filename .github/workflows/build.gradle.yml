@@ -29,7 +29,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
     - name: Publish with Gradle
-      run: ./gradlew publishToSonatype --no-daemon
+      run: ./gradlew publishToSonatype --stacktrace
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
