@@ -8,12 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Prod
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: Create annotation for build error
-        run: echo "token = ${secrets.GITHUB_TOKEN} ${{secrets.GITHUB_TOKEN}} user=${secrets.OSSRH_USERNAME}"
 
       - name: Build and Test
         uses: qcastel/github-actions-maven-cmd@master
@@ -30,7 +28,7 @@ jobs:
           release-branch-name: "main"
 
           maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dusername=${secrets.OSSRH_USERNAME} -Dpassword=${secrets.OSSRH_TOKEN}"
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.OCTOPUS_GITHUB_TOKEN }}
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
