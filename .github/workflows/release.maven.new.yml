@@ -1,0 +1,31 @@
+name: Maven Release New
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      BUILD_VERSION:
+        description: 'Build version'
+        default: '1.0-SNAPSHOT'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Prod
+    env:
+      BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set Version
+        uses: qcastel/github-actions-maven-cmd@master
+        with:
+          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${BUILD_VERSION}"
+
+      - name: Deploy to Neus
+        uses: qcastel/github-actions-maven-cmd@master
+        with:
+          maven-args: "-B -e clean deploy"
