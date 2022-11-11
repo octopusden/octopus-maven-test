@@ -8,6 +8,11 @@ on:
         description: 'Build version'
         default: '1.0-SNAPSHOT'
         required: true
+      IS_RELEASE:
+        type: boolean
+        description: 'Is release'
+        default: 'false'
+        required: true
 
 jobs:
   build:
@@ -28,8 +33,15 @@ jobs:
       uses: gradle/wrapper-validation-action@v1
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
-    - name: Publish with Gradle
-      run: ./gradlew publishToSonatype --debug
+    - name: Publish to staging or snapshot
+      if: ${{ github.event.inputs.IS_RELEASE != 'true' }}
+      run: ./gradlew publishToSonatype --info
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+    - name: Publish to release
+      if: ${{ github.event.inputs.IS_RELEASE == 'true' }}
+      run: ./gradlew closeAndReleaseRepository --info
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
