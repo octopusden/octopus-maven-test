@@ -41,7 +41,7 @@ jobs:
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
     - name: Publish to release
       if: ${{ github.event.inputs.IS_RELEASE == 'true' }}
-      run: ./gradlew closeAndReleaseRepository --info
+      run: ./gradlew closeAndReleaseSonatypeStagingRepository --info
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
