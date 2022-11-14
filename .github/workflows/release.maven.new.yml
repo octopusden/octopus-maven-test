@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: "echo"
-        run: echo "$MyVar ${{ github.event.inputs.BUILD_VERSION }}"
+        run: echo "$MyVar $BUILD_VERSION ${{ github.event.inputs.BUILD_VERSION }}"
 
       - name: Set Version
         uses: qcastel/github-actions-maven-cmd@master
@@ -33,3 +33,6 @@ jobs:
         uses: qcastel/github-actions-maven-cmd@master
         with:
           maven-args: "-B -e clean deploy"
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
