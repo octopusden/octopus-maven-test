@@ -37,11 +37,12 @@ jobs:
         uses: qcastel/github-actions-maven-cmd@master
         with:
           maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{ github.event.inputs.BUILD_VERSION }}"
-
-      - name: Deploy to Neus
-        uses: qcastel/github-actions-maven-cmd@master
-        with:
-          maven-args: "-B -e clean deploy"
+#      - name: Deploy to Neus
+#        uses: qcastel/github-actions-maven-cmd@master
+#        with:
+#          maven-args: "-B -e clean deploy"
+      - name: Publish package
+        run: mvn --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
