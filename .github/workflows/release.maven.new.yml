@@ -24,15 +24,25 @@ jobs:
       - name: "echo"
         run: echo "$MyVar $BUILD_VERSION ${{ github.event.inputs.BUILD_VERSION }}"
 
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
       - name: Set Version
         uses: qcastel/github-actions-maven-cmd@master
         with:
           maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{ github.event.inputs.BUILD_VERSION }}"
-
-      - name: Deploy to Neus
-        uses: qcastel/github-actions-maven-cmd@master
-        with:
-          maven-args: "-B -e clean deploy"
+#      - name: Deploy to Neus
+#        uses: qcastel/github-actions-maven-cmd@master
+#        with:
+#          maven-args: "-B -e clean deploy"
+      - name: Publish package
+        run: mvn --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
