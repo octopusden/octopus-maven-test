@@ -16,17 +16,18 @@ jobs:
     environment: Prod
     env:
       BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
+      MyVar: test-value
 
     steps:
       - uses: actions/checkout@v1
 
       - name: "echo"
-        run: echo "BUILD_VERSION= $BUILD_VERSION ${BUILD_VERSION} ${env.BUILD_VERSION} ${{ github.event.inputs.BUILD_VERSION }}"
+        run: echo "$MyVar ${{ github.event.inputs.BUILD_VERSION }}"
 
       - name: Set Version
         uses: qcastel/github-actions-maven-cmd@master
         with:
-          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${env.BUILD_VERSION}"
+          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{ github.event.inputs.BUILD_VERSION }}"
 
       - name: Deploy to Neus
         uses: qcastel/github-actions-maven-cmd@master
