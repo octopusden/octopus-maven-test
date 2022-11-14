@@ -45,6 +45,12 @@ publishing {
                     url.set("https://github.com/kzaporozhtsev/octopus-maven-test.git")
                     connection.set("scm:git://github.com/kzaporozhtsev/octopus-maven-test.git")
                 }
+                developers {
+                    developer {
+                        id.set("octopus")
+                        name.set("octopus")
+                    }
+                }
             }
         }
     }
