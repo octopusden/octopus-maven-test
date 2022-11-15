@@ -24,6 +24,11 @@ jobs:
       - name: "echo"
         run: echo "$MyVar $BUILD_VERSION ${{ github.event.inputs.BUILD_VERSION }}"
 
+      - name: Build and Test
+        uses: qcastel/github-actions-maven-cmd@master
+        with:
+          maven-args: "clean install"
+
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v3
         with:
