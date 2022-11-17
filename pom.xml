@@ -58,7 +58,7 @@
     </build>
 
     <properties>
-        <maven.skipStaging>true</maven.skipStaging>
+        <maven.skipStaging>false</maven.skipStaging>
         <maven.skipLocalStaging>false</maven.skipLocalStaging>
     </properties>
 
