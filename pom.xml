@@ -6,6 +6,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Octopus module for testing Maven release workflow</name>
+    <description>For test purposes</description>
+    <url>https://octopusden.org</url>
 
     <licenses>
         <license>
@@ -13,6 +15,15 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <name>Philip Gorbachev</name>
+            <email>phil.gorbachev@gmail.com</email>
+            <organization>Octopus Den</organization>
+            <organizationUrl>https://octopusden.org</organizationUrl>
+        </developer>
+    </developers>
 
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
