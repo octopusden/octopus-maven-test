@@ -42,7 +42,7 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                    <skipRemoteStaging>true</skipRemoteStaging>
+                    <skipRemoteStaging>false</skipRemoteStaging>
                     <skipStaging>${maven.skipStaging}</skipStaging>
                     <skipLocalStaging>${maven.skipLocalStaging}</skipLocalStaging>
                 </configuration>
