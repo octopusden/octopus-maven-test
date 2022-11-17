@@ -56,7 +56,10 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
 
       - name: Deploy to staging
-        run: mvn --batch-mode nexus-staging:deploy-staged
+        run: mvn --batch-mode nexus-staging:deploy-staged -Dmaven.skipStaging=false
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+
+      - name: Print
+        run: ls -R target
