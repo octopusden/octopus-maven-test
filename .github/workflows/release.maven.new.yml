@@ -52,9 +52,8 @@ jobs:
       - name: Print2
         run: cat /home/runner/.m2/settings.xml
 
-
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -P gpg
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
