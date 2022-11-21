@@ -47,3 +47,9 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Create/update tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+         tag: "v$BUILD_VERSION"
+         message: "Release $BUILD_VERSION"
