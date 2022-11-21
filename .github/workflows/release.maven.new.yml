@@ -16,6 +16,7 @@ jobs:
     environment: Prod
     env:
       BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
+      ver: ${{ github.event.inputs.BUILD_VERSION }}
 
     steps:
       - uses: actions/checkout@v1
@@ -28,7 +29,7 @@ jobs:
       - name: Set Version
         uses: qcastel/github-actions-maven-cmd@master
         with:
-          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=$BUILD_VERSION"
+          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=$ver"
 
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v3
@@ -51,5 +52,5 @@ jobs:
       - name: Create/update tag
         uses: rickstaa/action-create-tag@v1
         with:
-         tag: "v$BUILD_VERSION"
-         message: "Release $BUILD_VERSION"
+         tag: "v$ver"
+         message: "Release $ver"
