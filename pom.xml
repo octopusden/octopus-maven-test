@@ -69,7 +69,7 @@
 
     <profiles>
         <profile>
-            <id>gpg-</id>
+            <id>gpg</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
