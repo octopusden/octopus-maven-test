@@ -16,13 +16,9 @@ jobs:
     environment: Prod
     env:
       BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
-      MyVar: test-value
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: "echo"
-        run: echo "$MyVar $BUILD_VERSION ${{ github.event.inputs.BUILD_VERSION }}"
 
       - name: Build and Test
         uses: qcastel/github-actions-maven-cmd@master
@@ -32,11 +28,7 @@ jobs:
       - name: Set Version
         uses: qcastel/github-actions-maven-cmd@master
         with:
-          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{ github.event.inputs.BUILD_VERSION }}"
-#      - name: Deploy to Neus
-#        uses: qcastel/github-actions-maven-cmd@master
-#        with:
-#          maven-args: "-B -e clean deploy"
+          maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=$BUILD_VERSION"
 
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v3
@@ -49,21 +41,9 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # gpg private key to import
           gpg-passphrase: GPG_PASSPHRASE # env variable for gpg signing in deploy
 
-      - name: Print2
-        run: cat /home/runner/.m2/settings.xml
-
       - name: Publish package
         run: mvn --batch-mode deploy -P gpg
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
-#      - name: Deploy to staging
-#        run: mvn --batch-mode nexus-staging:deploy-staged nexus-staging:close -Dmaven.skipStaging=false
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-
-      - name: Print
-        run: ls -R target
