@@ -48,8 +48,21 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Create/update tag
-        uses: rickstaa/action-create-tag@v1
+#      - name: Create/update tag
+#        uses: rickstaa/action-create-tag@v1
+#        with:
+#         tag: "v${{env.BUILD_VERSION}}"
+#         message: "Release ${{env.BUILD_VERSION}}"
+
+      - name: Create Release
+        id: create_release
+        if: github.ref == 'refs/heads/main'
+        uses: actions/create-release@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}# This token is provided by Actions, you do not need to create your own token
         with:
-         tag: "v${{env.BUILD_VERSION}}"
-         message: "Release ${{env.BUILD_VERSION}}"
+            tag_name: "v${{ steps.release.outputs.current-version }}"
+            release_name: Release ${{ steps.release.outputs.current-version }}
+            body: ${{ steps.read_changelog.outputs.changes }}
+            draft: false
+            prerelease: false
