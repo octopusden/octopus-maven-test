@@ -52,16 +52,6 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                    <skipRemoteStaging>false</skipRemoteStaging>
-                    <skipStaging>${maven.skipStaging}</skipStaging>
-                    <skipLocalStaging>${maven.skipLocalStaging}</skipLocalStaging>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <scmCommentPrefix>[ci skip]</scmCommentPrefix>
-                    <tagNameFormat>octopus-maven-test-v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
         </plugins>
@@ -93,10 +83,4 @@
             </build>
         </profile>
     </profiles>
-
-    <properties>
-        <maven.skipStaging>false</maven.skipStaging>
-        <maven.skipLocalStaging>false</maven.skipLocalStaging>
-    </properties>
-
 </project>
