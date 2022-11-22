@@ -1,4 +1,4 @@
-name: Maven Release
+name: Maven Release (Deprecated)
 
 # Controls when the workflow will run
 on:
