@@ -26,7 +26,7 @@ jobs:
     - name: Get latest tag
       id: git_version
       run: |
-        echo "TAGS: $(git tag -l --sort=v:refname "v[0-9,\\.]*" | tail -5)"
+        echo "TAGS: $(/usr/bin/git tag -l --sort=v:refname "v[0-9,\\.]*" | tail -5)"
         echo "tag=$(git tag -l --sort=v:refname "v[0-9,\\.]*" | tail -1)" >> $GITHUB_OUTPUT
     - name: print
       run: |
