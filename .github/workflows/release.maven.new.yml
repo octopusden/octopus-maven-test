@@ -22,12 +22,12 @@ jobs:
       - run: |
           echo "REPOSITORY: ${{ env.GITHUB_REPOSITORY }}"
           echo "REPOSITORY: $GITHUB_REPOSITORY"
-
+          echo "REPOSITORY: ${{ github.repository }}"
       - name: Get the tag version
         id: tag_version
         uses: oprypin/find-latest-tag@v1
         with:
-          repository: $GITHUB_REPOSITORY
+          repository: ${{ github.repository }}
           regex: '^v([0-9]+)\..*'
       - uses: actions-ecosystem/action-regex-match@v2
         id: version
