@@ -16,19 +16,10 @@
         </license>
     </licenses>
 
-    <developers>
-        <developer>
-            <name>Philip Gorbachev</name>
-            <email>phil.gorbachev@gmail.com</email>
-            <organization>Octopus Den</organization>
-            <organizationUrl>https://octopusden.org</organizationUrl>
-        </developer>
-    </developers>
-
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
-	    <url>https://github.com/kzaporozhtsev/octopus-maven-test.git</url>
+	    <url>https://github.com/octopusden/octopus-maven-test.git</url>
     </scm>
     <distributionManagement>
         <snapshotRepository>
