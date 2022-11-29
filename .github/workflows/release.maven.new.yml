@@ -19,12 +19,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - run: |
+          echo "REPOSITORY: ${{ env.GITHUB_REPOSITORY }}"
+          echo "REPOSITORY: $GITHUB_REPOSITORY"
 
       - name: Get the tag version
         id: tag_version
         uses: oprypin/find-latest-tag@v1
         with:
-          repository: ${{ env.GITHUB_REPOSITORY }}
+          repository: octopus/octopus-maven-test
           regex: '^v([0-9]+)\..*'
       - uses: actions-ecosystem/action-regex-match@v2
         id: version
