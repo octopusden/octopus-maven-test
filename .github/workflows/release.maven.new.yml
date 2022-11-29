@@ -24,7 +24,7 @@ jobs:
         id: tag_version
         uses: oprypin/find-latest-tag@v1
         with:
-          repository: GITHUB_REPOSITORY
+          repository: ${{ env.GITHUB_REPOSITORY }}
           regex: '^v([0-9]+)\..*'
       - uses: actions-ecosystem/action-regex-match@v2
         id: version
