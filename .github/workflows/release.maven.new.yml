@@ -27,7 +27,7 @@ jobs:
         id: tag_version
         uses: oprypin/find-latest-tag@v1
         with:
-          repository: octopus/octopus-maven-test
+          repository: $GITHUB_REPOSITORY
           regex: '^v([0-9]+)\..*'
       - uses: actions-ecosystem/action-regex-match@v2
         id: version
@@ -57,7 +57,8 @@ jobs:
             uses: qcastel/github-actions-maven-cmd@master
             with:
               maven-args: "org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{env.BUILD_VERSION}}"
-
+            env:
+              BUILD_VERSION: ${{ env.BUILD_VERSION }}
           - name: Set up Maven Central Repository
             uses: actions/setup-java@v3
             with:
