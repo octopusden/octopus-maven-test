@@ -50,7 +50,7 @@ jobs:
         run: |
           VERSION_PATCH=${{ steps.version.outputs.group3 }}
           echo "BUILD_VERSION=${{ steps.version.outputs.group1 }}.${{ steps.version.outputs.group2 }}.$(($VERSION_PATCH+1))" >> $GITHUB_ENV
-      - run:
+      - run: |
           echo "BUILD_VERSION: ${{ env.BUILD_VERSION }}"
 
       - name: Set Version
