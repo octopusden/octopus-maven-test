@@ -34,7 +34,7 @@ jobs:
         name: Prepare a version from a tag
         with:
           text: ${{ steps.tag_version.outputs.tag }}
-          regex: '^v([0-9]+)\.?([0-9]+)?\.?([0-9+])?'
+          regex: '^v([0-9]+)\.?([0-9]+)?\.?([0-9]+)?'
           flags: gm
       - run: |
           echo "MAJOR: ${{ steps.version.outputs.group1 }}"
