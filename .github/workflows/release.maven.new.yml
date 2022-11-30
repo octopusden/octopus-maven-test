@@ -20,8 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: |
-          echo "REPOSITORY: ${{ env.GITHUB_REPOSITORY }}"
-          echo "REPOSITORY: $GITHUB_REPOSITORY"
           echo "REPOSITORY: ${{ github.repository }}"
       - name: Get the tag version
         id: tag_version
