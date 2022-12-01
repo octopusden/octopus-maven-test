@@ -52,7 +52,7 @@ jobs:
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
-        BUILD_VERSION: ${{ steps.version.outputs.group1 }}
+        BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
 #    - name: Publish to release
 #      if: ${{ !endsWith(steps.version.outputs.group1, 'SNAPSHOT') }}
 #      run: ./gradlew closeAndReleaseSonatypeStagingRepository --info
