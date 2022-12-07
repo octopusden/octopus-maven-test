@@ -32,7 +32,7 @@ nexusPublishing {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"])
+            artifact(tasks.named("bootJar"))
             pom {
                 name.set(project.name)
                 description.set("Octopus module for testing Maven release workflow")
