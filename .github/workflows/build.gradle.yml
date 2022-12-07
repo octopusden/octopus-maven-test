@@ -16,7 +16,11 @@ on:
         description: 'Is release'
         default: 'false'
         required: true
-
+      PUBLISH_DOCKER:
+        type: boolean
+        description: 'Publish docker'
+        default: 'false'
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -53,6 +57,11 @@ jobs:
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
         BUILD_VERSION: ${{ github.event.inputs.BUILD_VERSION }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ github.event.inputs.PUBLISH_DOCKER == true }}
+      with:
+        name: artifact
+        path: build/libs/octopus-test-${{ github.event.inputs.BUILD_VERSION }}.jar
 #    - name: Publish to release
 #      if: ${{ !endsWith(steps.version.outputs.group1, 'SNAPSHOT') }}
 #      run: ./gradlew closeAndReleaseSonatypeStagingRepository --info
@@ -63,3 +72,32 @@ jobs:
 #        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
 #        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
 #        BUILD_VERSION: ${{ steps.version.outputs.group1 }}
+  publishDocker:
+    if: ${{ github.event.inputs.PUBLISH_DOCKER == true }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Prod
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out the repo
+      - uses: actions/download-artifact@v3
+        name: Download artifact
+        with:
+          name: artifact
+          path: build/libs/octopus-test-${{ github.event.inputs.BUILD_VERSION }}.jar
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: JAR_FILE=/build/libs/octopus-test-*.jar
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/octopus-test:latest
+

@@ -1,9 +1,11 @@
-
 plugins {
     `maven-publish`
     `java-library`
     `signing`
+    `jacoco`
     id("io.github.gradle-nexus.publish-plugin")
+    id("org.springframework.boot") version "2.7.0"
+    id("io.spring.dependency-management") version "1.1.0"
 }
 
 group = "org.octopusden"
@@ -65,5 +67,31 @@ if (!project.version.toString().endsWith("SNAPSHOT", true)) {
             signingKey,
             signingPassword
         )
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+
+tasks {
+    test {
+        useJUnitPlatform()
+        finalizedBy(jacocoTestReport) // report is always generated after tests run
+    }
+    jacocoTestReport {
+        reports {
+            xml.required.set(true)
+            xml.outputLocation.set(file("${buildDir}/reports/jacoco/report.xml"))
+            html.required.set(true)
+            csv.required.set(true)
+        }
+        dependsOn(test) // tests are required to run before generating the report
     }
 }
