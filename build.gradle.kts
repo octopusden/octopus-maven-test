@@ -33,6 +33,8 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             artifact(tasks.named("bootJar"))
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
             pom {
                 name.set(project.name)
                 description.set("Octopus module for testing Maven release workflow")
