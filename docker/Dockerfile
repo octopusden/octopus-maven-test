@@ -1,7 +1,9 @@
 FROM eclipse-temurin:11-centos7
-ARG JAR_FILE=build/libs/octopus-test-*.jar
+ARG JAR_DIR=build/libs/
+ARG JAR_FILE=octopus-test-*.jar
 WORKDIR app
-COPY ${JAR_FILE} app.jar
+COPY $JAR_DIR$JAR_FILE ./
+RUN mv $JAR_FILE app.jar
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 CMD "sh"
 EXPOSE 8080

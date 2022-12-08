@@ -97,7 +97,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          build-args: JAR_FILE=build/libs/octopus-test-${{ github.event.inputs.BUILD_VERSION }}.jar
+          build-args: JAR_FILE=octopus-test-${{ github.event.inputs.BUILD_VERSION }}.jar
           file: docker/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/octopus-test:${{ github.event.inputs.BUILD_VERSION }}
