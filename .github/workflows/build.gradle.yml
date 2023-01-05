@@ -26,8 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: Prod
     steps:
-    - uses: ./.github/actions/checkout
-      id: Reusable_action
+    - uses: actions/checkout@v3
+    - id: REUSABLE_ACTION
+      uses: ./.github/actions/checkout
     - uses: actions-ecosystem/action-regex-match@v2
       id: version
       with:
