@@ -27,7 +27,7 @@ jobs:
     environment: Prod
     steps:
     - uses: ./.github/actions/checkout
-      id: Reusable action
+      id: Reusable_action
     - uses: actions-ecosystem/action-regex-match@v2
       id: version
       with:
